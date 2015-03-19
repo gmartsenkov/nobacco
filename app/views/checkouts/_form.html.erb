@@ -1,0 +1,73 @@
+<style>
+.btn-radio {
+  width: 100%;
+}
+.img-radio {
+  opacity: 0.5;
+  margin-bottom: 5px;
+}
+
+.space-20 {
+    margin-top: 20px;
+}
+</style>
+<script>
+$(function () {
+    $('.btn-radio').click(function(e) {
+        $('.btn-radio').not(this).removeClass('active')
+        .siblings('input').prop('checked',false)
+            .siblings('.img-radio').css('opacity','0.5');
+      $(this).addClass('active')
+            .siblings('input').prop('checked',true)
+        .siblings('.img-radio').css('opacity','1');
+    });
+});
+</script>
+<div class="col-md-5 center-block" style="float:none;">
+  <div class="panel panel-default">
+    <div class="panel-body" style="">
+<%= bootstrap_form_for(@checkout) do |f| %>
+  <% if @checkout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@checkout.errors.count, "error") %> prohibited this checkout from being saved:</h2>
+
+      <ul>
+      <% @checkout.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :name , "Имена*" %><br>
+    <%= f.text_field :name ,  hide_label: true %>
+  </div>
+  <div class="field">
+    <%= f.label :telephone , 'Телефон*' %><br>
+    <%= f.text_field :telephone ,  hide_label: true %>
+  </div>
+  <div class="field">
+    <%= f.label :adress , 'Адрес*' %><br>
+    <%= f.text_field :adress ,  hide_label: true %>
+  </div>
+  <div class="field">
+    <%= f.label :city, 'Град*' %><br>
+    <%= f.text_field :city ,  hide_label: true %>
+  </div>
+  <div class="field">
+    <%= f.label :email , 'Email' %><br>
+    <%= f.text_field :email ,  hide_label: true %>
+  </div>
+  <div class="field">
+    <%= f.label :info , 'Забележки' %><br>
+    <%= f.text_area :info , hide_label: true , :rows => 7 %>
+  </div>
+  <div class="actions">
+    <small>Прегледайте внимателно данните си преди да продължите.</small>
+    <%= f.submit 'Поръчай' %>
+  </div>
+<% end %>
+
+</div>
+</div>
+</div>

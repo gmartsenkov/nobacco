@@ -1,0 +1,54 @@
+<%= render 'layouts/adminpanel' %>
+<div class="col-md-9">
+          <h4><%= @category.name.capitalize %></h4>
+          <hr>
+          <div class="table-responsive">
+
+
+                <table id="mytable" class="table table-bordred table-striped">
+
+                     <thead>
+
+
+                     <th>Продукт</th>
+                      <th>Под-Категория</th>
+                       <th>Количество</th>
+                       <th>Цена</th>
+                       <th>Промоция</th>
+                        <th>Виж</th>
+                        <th>Редактирай</th>
+                         <th>Изтрий</th>
+                     </thead>
+      <tbody>
+      <% @category.products.each do |product| %>
+      <tr>
+      <td> <%= product.name.capitalize %></td>
+      <td> <%= product.sub_category ? product.sub_category.name : "-" %></td>
+      <td> <%= product.in_stock %></td>
+      <td> <%= humanized_money(product.price).to_s + 'лв' %></td>
+      <td> <%= product.promotion ? humanized_money(product.promotion).to_s + 'лв' : '-' %> </td>
+      <td> <%= link_to 'Виж', product %></td>
+      <td> <%= link_to 'Редактирай', edit_product_path(product) %> </td>
+      <td> <%= link_to 'Изтрий', product, method: :delete, data: { confirm: 'Сигурни ли сте?' } %> </td>
+      </tr>
+      <% end %>
+
+
+
+
+      </tbody>
+
+  </table>
+
+  <div class="clearfix"></div>
+
+              </div>
+
+          </div>
+    </div>
+  </div>
+
+
+
+        <!-- /.modal-dialog -->
+</div>

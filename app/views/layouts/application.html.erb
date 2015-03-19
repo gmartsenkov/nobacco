@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nobacco</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= cart %>
+<div class="container-fluid" style="padding-left:7%;padding-right:7%;padding-top:5px;">
+  <% if current_user %>
+  <p class="pull-left"><%= link_to 'Контролен Панел' , control_panel_path %>
+  <p>&nbsp;&nbsp; | &nbsp;&nbsp;<%= link_to('Изход', destroy_user_session_path, :method => :delete) %></p>
+  </p>
+  <% end %>
+<p class="pull-right">
+<a href="<%= user_cart_path %>"><i class="fa fa-shopping-cart"></i>&nbsp;Кошница (<%= Cart.find(cookies[:cart]).in_carts.size %>)</a>
+
+</p>
+<a href="<%= root_path %>"><img src="/logo2.png" class="img-responsive" style="padding-bottom:8px;padding-top:5px;max-width:350px;"></a>
+<div id="wrapper-content" class="container-fluid" style="background-color:#F6F6E5;padding:0;padding-bottom:30px;min-height:700px;">
+<%= render 'layouts/header' %>
+<%= yield %>
+
+</div>
+<%= render 'layouts/footer' %>
+
+</div>
+</body>
+</html>

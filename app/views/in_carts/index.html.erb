@@ -1,0 +1,33 @@
+<h1>Listing in_carts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cart</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Color</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @in_carts.each do |in_cart| %>
+      <tr>
+        <td><%= in_cart.cart_id %></td>
+        <td><%= in_cart.product_id %></td>
+        <td><%= in_cart.quantity %></td>
+        <td><%= in_cart.color %></td>
+        <td><%= link_to 'Show', in_cart %></td>
+        <td><%= link_to 'Edit', edit_in_cart_path(in_cart) %></td>
+        <td><%= link_to 'Destroy', in_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New In cart', new_in_cart_path %>

@@ -1,0 +1,29 @@
+<h1>Listing additional_images</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @additional_images.each do |additional_image| %>
+      <tr>
+        <td><%= additional_image.image %></td>
+        <td><%= additional_image.product_id %></td>
+        <td><%= link_to 'Show', additional_image %></td>
+        <td><%= link_to 'Edit', edit_additional_image_path(additional_image) %></td>
+        <td><%= link_to 'Destroy', additional_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Additional image', new_additional_image_path %>

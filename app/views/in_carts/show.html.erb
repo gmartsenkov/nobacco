@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cart:</strong>
+  <%= @in_cart.cart_id %>
+</p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @in_cart.product_id %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @in_cart.quantity %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @in_cart.color %>
+</p>
+
+<%= link_to 'Edit', edit_in_cart_path(@in_cart) %> |
+<%= link_to 'Back', in_carts_path %>

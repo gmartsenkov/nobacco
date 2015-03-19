@@ -1,0 +1,107 @@
+<style>
+.table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+}
+@media screen and (max-width: 600px) {
+    table#cart tbody td .form-control{
+    width:20%;
+    display: inline !important;
+  }
+  .actions .btn{
+    width:36%;
+    margin:1.5em 0;
+  }
+
+  .actions .btn-info{
+    float:left;
+  }
+  .actions .btn-danger{
+    float:right;
+  }
+
+  table#cart thead { display: none; }
+  table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+  table#cart tbody tr td:first-child { background: #333; color: #fff; }
+  table#cart tbody td:before {
+    content: attr(data-th); font-weight: bold;
+    display: inline-block; width: 8rem;
+  }
+
+
+
+  table#cart tfoot td{display:block; }
+  table#cart tfoot td .btn{display:block;}
+
+}
+
+</style>
+      <div class="col-xs-12">
+          <ul class="nav nav-pills nav-justified thumbnail">
+              <li class="active"><a href="#">
+                  <h4 class="list-group-item-heading">Стъпка 1</h4>
+                  <p class="list-group-item-text">Преглед на кошница</p>
+              </a></li>
+              <li class="disabled"><a href="#">
+                  <h4 class="list-group-item-heading">Стъпка 2</h4>
+                  <p class="list-group-item-text">Поръчка</p>
+              </a></li>
+              <li class="disabled"><a href="#">
+                  <h4 class="list-group-item-heading">Стъпка 3</h4>
+                  <p class="list-group-item-text">Преглед на поръчка</p>
+              </a></li>
+          </ul>
+      </div>
+
+<table id="cart" class="table table-hover table-condensed">
+            <thead>
+            <tr>
+              <th style="width:50%">Продукт</th>
+              <th style="width:10%">Цена</th>
+              <th style="width:8%">Колечество</th>
+              <th style="width:22%" class="text-center">Междинен сбор</th>
+              <th style="width:10%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% x=0 %>
+            <% @cart.in_carts.each do |in_cart| %>
+            <% x += in_cart.product.price * in_cart.quantity %>
+            <tr>
+              <td data-th="Продукт">
+                <div class="row">
+                  <div class="col-sm-2 hidden-xs"><img src="<%= in_cart.product.image.thumb %>" alt="..." class="img-responsive"/></div>
+                  <div class="col-sm-10">
+                    <h4 class="nomargin"><%= in_cart.product.name %></h4>
+                    <p><%= sanitize(in_cart.product.description,:tags=>[]).split(".").first.html_safe %></p>
+                  </div>
+                </div>
+              </td>
+              <td data-th="Цена"><%= humanized_money in_cart.product.price %>лв</td>
+              <td data-th="Количество">
+                <%= in_cart.quantity %>
+              </td>
+              <td data-th="Обща Цена" class="text-center"><%= humanized_money (in_cart.product.price * in_cart.quantity) %>лв</td>
+              <td class="actions" data-th="">
+                <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe , in_cart, method: :delete, data: { confirm: 'Сигурни ли сте?' } , :class => "btn btn-danger btn-sm" %>
+
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr class="visible-xs">
+              <td class="text-center"><strong><%= humanized_money x %>лв</strong></td>
+            </tr>
+            <tr>
+              <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i>&nbsp;Продължи да пазаруваш</a></td>
+              <td colspan="2" class="hidden-xs"></td>
+              <td class="hidden-xs text-center"><strong>
+                &#8776; <%= ekont(x) %>лв(доставка)
+                <br>
+                Общо: <%= humanized_money x + ekont(x) %>лв</strong>
+                </td>
+              <td>
+                <a href="<%= new_checkout_path %>" class="btn btn-success btn-block">Поръчай&nbsp;<i class="fa fa-angle-right"></i></a></td>
+            </tr>
+          </tfoot>
+        </table>

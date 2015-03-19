@@ -1,0 +1,35 @@
+<div class="container-liquid">
+<div class="col-md-6 col-md-offset-3">
+<div class="panel panel-default center-block">
+<div class="panel-heading">
+<h4><%= @product.name %></h4>
+</div>
+<div class="panel-body">
+<div class="col-md-5">
+<%= bootstrap_form_for(@in_cart,{:class=>"form-inline"}) do |f| %>
+<%= f.hidden_field :product_id, :value => params[:product]%>
+<div class="form-group">
+    <%= f.label :quantity,'Количество' %><br>
+    <%= f.number_field :quantity ,  hide_label: true %>
+  </div>
+  <% if @product.colors != "" %>
+  <div class="form-group">
+    <%= f.label :color , 'Цвят' %><br>
+    <%= in_color(@product.colors)  %>
+  </div>
+  <% end %>
+  <% if @product.nicotine != "" %>
+  <div class="form-group">
+    <%= f.label :nicotine , 'Никотин' %><br>
+    <%= in_nicotine(@product.nicotine)  %>
+  </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit 'Добави в кошница' %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>

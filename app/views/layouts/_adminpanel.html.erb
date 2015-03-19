@@ -1,0 +1,45 @@
+<div class="col-sm-3 col-md-3">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            Добави Продукт</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                              <% Category.all.each do |cat| %>
+                                <tr>
+                                    <td>
+                                    </span><a href="<%= new_product_path(:type => cat.slug) %>">Добави <%= cat.name %></a>
+                                    </td>
+                                </tr>
+                                <% end %>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Стока и поръчки</a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                              <% Category.all.each do |cat| %>
+                                <tr>
+                                    <td>
+                                        <a href="<%= categories_path(:type => cat.slug) %>"><%= cat.name %></a>
+                                    </td>
+                                </tr>
+                                <% end %>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
