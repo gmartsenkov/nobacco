@@ -6,7 +6,7 @@ class Ability
     #
     user ||= User.new
 
-          if user.id == 1
+          if user.id >= 1 
               can :manage, :all
               else
               can :read, :all

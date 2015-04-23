@@ -25,7 +25,9 @@ class CheckoutsController < ApplicationController
   def create
     @checkout = Checkout.new(checkout_params)
     @checkout.save
-    respond_with(@checkout)
+    respond_to do |format|
+      format.html {redirect_to root_path}
+    end
   end
 
   def update

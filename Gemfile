@@ -51,6 +51,16 @@ gem 'bullet'
 gem 'annotate'
 end
 
+group :development, :test do
+  gem 'fuubar'
+  gem 'guard-rspec', require: false
+  gem 'guard-zeus'
+  gem 'growl'
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

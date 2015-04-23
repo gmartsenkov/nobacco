@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20150227164556) do
     t.integer  "category_id"
     t.integer  "subcategory_id"
     t.string   "colors"
-    t.integer  "in_stock"
+    t.integer  "in_stock",                                default: 1
     t.text     "description"
     t.string   "image"
     t.datetime "created_at"
